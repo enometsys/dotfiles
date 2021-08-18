@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+function cbright {
+  xbacklight -get | cut -d'.' -f1
+}
+
+function notify {
+    brightness=`cbright`
+    
+    if [ "$brightness" = "0" ]; then
+        # icon_name="notification-display-brightness-off"
+        icon_name="display-brightness-symbolic.symbolic"
+    else    
+        if [  "$brightness" -lt "10" ]; then
+            # icon_name="notification-display-brightness-low"
+            icon_name="display-brightness-symbolic.symbolic"
+        else
+            if [ "$brightness" -lt "30" ]; then
+                # icon_name="notification-display-brightness-medium"
+                icon_name="display-brightness-symbolic.symbolic"
+            else
+                if [ "$brightness" -lt "70" ]; then
+                    # icon_name="notification-display-brightness-medium"
+                    icon_name="display-brightness-symbolic.symbolic"
+                else
+                    if [ "$brightness" -lt "100" ]; then
+                        # icon_name="notification-display-brightness-high"
+                        icon_name="display-brightness-symbolic.symbolic"
+                    else
+                        # icon_name="notification-display-brightness-full"
+                        icon_name="display-brightness-symbolic.symbolic"
+                    fi
+                fi
+            fi
+        fi
+    fi
+
+    dunstify -r 1234 -i "$icon_name" -t 2000 "$brightness "
+}
+
+case $1 in
+  up)
+    # +5%
+    xbacklight -inc 5
+	  notify
+	;;
+  down)
+    # -5%
+    xbacklight -dec 5
+	  notify
+	;;
+  optimal)
+    # Toggle optimal
+    xbacklight -set 25
+    notify
+	;;
+esac 

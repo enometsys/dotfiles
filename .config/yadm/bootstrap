@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# exit on first non-zero exit
+. "$HOME/.scripts/bootstrap-user"

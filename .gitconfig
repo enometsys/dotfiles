@@ -1,0 +1,13 @@
+[user]
+	email = tubig.jlu@gmail.com
+	name = John Leonard Tubig
+	signingkey = 0x853F15741D476789
+
+[init]
+	defaultBranch = main
+
+[commit]
+	gpgSign = true
+
+[pull]
+	rebase = false

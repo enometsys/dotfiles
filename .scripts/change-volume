@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# Audio volume changer using alsa mixer
+
+function cvol {
+  amixer get Master | grep '%' | head -n 1 | awk -F'[' '{print $2}' | awk -F'%' '{print $1}'
+}
+
+function chkmute {
+  amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off
+}
+
+function notify {
+  volume=`cvol`
+  
+  if [ "$volume" = "0" ]; then
+    icon_name="audio-volume-muted-symbolic.symbolic"
+  else    
+    if [  "$volume" -lt "10" ]; then
+      icon_name="audio-volume-low-symbolic.symbolic"
+    else
+      if [ "$volume" -lt "30" ]; then
+        icon_name="audio-volume-low-symbolic.symbolic"
+      else
+        if [ "$volume" -lt "70" ]; then
+          icon_name="audio-volume-medium-symbolic.symbolic"
+        else
+          icon_name="audio-volume-high-symbolic.symbolic"
+        fi
+      fi
+    fi
+  fi
+
+  dunstify -r 1234 -i "$icon_name" -t 2000 "$volume "
+}
+
+case $1 in
+  up)
+	  # Unmute
+	  amixer set Master on -q
+	  # +5%
+	  amixer sset Master 5%+ -q
+    # update statusbar
+    . "$HOME/.scripts/check-status" update-statusbar
+    # notify
+	  notify
+	;;
+  down)
+    # Unmute
+	  amixer set Master on -q
+    # -5%
+	  amixer sset Master 5%- -q
+    # update statusbar
+    . "$HOME/.scripts/check-status" update-statusbar
+    # notify
+	  notify
+	;;
+  mute)
+    # Toggle mute
+	  amixer set Master toggle -q
+    # update statusbar
+    . "$HOME/.scripts/check-status" update-statusbar
+    # notify
+	  if chkmute ; then
+      icon_name="audio-volume-muted-symbolic.symbolic"
+      dunstify -r 1234 -i "$icon_name" -t 2000 "Muted "
+	  else
+	    notify
+	  fi
+	;;
+esac

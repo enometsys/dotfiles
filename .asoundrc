@@ -1,0 +1,5 @@
+# set default sound card
+defaults.pcm.!card PCH
+defaults.ctl.!card PCH
+defaults.pcm.!device 0
+defaults.ctl.!device 0

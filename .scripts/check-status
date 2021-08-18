@@ -1,0 +1,74 @@
+#!/bin/bash
+
+SPACING="  "
+DIVIDER="$SPACING|$SPACING"
+
+function print_network {
+  wifi_status=$( nmcli | grep -e '^wl.*0:' | cut -d' ' -f2 )
+
+  if [[ $wifi_status == "disconnected" ]]; then
+    echo -e "offline$DIVIDER"
+  elif [[ $wifi_status == "connected" ]]; then
+    wifi_name=$( nmcli | grep -e 'wl.*0: conn' | cut -d' ' -f4 )
+    echo -e "$wifi_name$DIVIDER"
+  else
+    echo -e "$wifi_status$DIVIDER"
+  fi
+}
+
+function print_video {
+  vendor=$( glxinfo | egrep 'OpenGL vendor' | cut -d':' -f2 | cut -d' ' -f2 )
+  echo -e "$vendor$DIVIDER"
+}
+
+function print_bluetooth {
+  device="n/a"
+  # FIXME: blueoothctl just hangs if bluetooth.service isn't running
+  if [[ "$(bluetoothctl info)" != "Missing device address argument" ]]; then
+    device=$(bluetoothctl info | grep Name: | cut -d':' -f2)
+  fi
+  echo -e "Bl $device$DIVIDER"
+}
+
+function print_volume {
+  vol_level=$( amixer get Master | grep '%' | head -n 1 | awk -F'[' '{print $2}' | awk -F'%' '{print $1}' )
+  is_mute=$( amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep 'off' )
+  if [[ ! -z "$is_mute" ]] ; then
+    status=" M"
+  else
+    status=""
+  fi
+  echo -e "Vol $vol_level$status$DIVIDER"
+}
+
+function print_battery {
+  batt_status=$( acpi -b | awk -F'[,:% ]' '{print $4}' )
+  batt_charge=$( acpi -b | awk -F'[,:%]' '{print $3}' )
+  if [[ $batt_status == "Charging" ]]; then
+    batt_status=" C"
+  else
+    batt_status=""
+  fi
+  echo -e "Bat $batt_charge$batt_status$DIVIDER"
+}
+
+function print_date {
+  echo -e "$( date +"%a %b %d %H:%M" )"
+}
+
+function print_status {
+  # status="$( print_network )$( print_video )$( print_volume )$( print_battery )$( print_date )$SPACING"
+  status="$( print_network )$( print_bluetooth )$( print_volume )$( print_battery )$( print_date )$SPACING"
+  echo -e "$status"
+}
+
+case $1 in
+  update-statusbar)
+    # update statusbar
+    xsetroot -name "$( print_status )"
+	;;
+  print)
+    # print the status
+    print_status
+  ;;
+esac

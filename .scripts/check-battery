@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Audio volume changer using alsa acpi
+
+function notify {
+  batt_status=$( acpi -b | awk -F'[,:% ]' '{print $4}' )
+  batt_charge=$( acpi -b | awk -F'[,:% ]' '{print $6}' )
+  icon_name="battery-level-0-symbolic.symbolic"
+
+  # Notify low battery state
+  if [[ $batt_status == "Discharging" ]] && [[  $batt_charge -le 10 ]]; then
+    dunstify -r 1234 -i "$icon_name" -t 2000 "Low Battery "
+  else
+    :
+    # dunstify -r 1234 -i "$icon_name" -t 2000 "$batt_charge "
+  fi
+}
+
+case $1 in
+  notify)
+	  # notify on low battery
+	  notify
+	;;
+esac

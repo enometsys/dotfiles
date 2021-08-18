@@ -1,0 +1,121 @@
+#!/bin/sh
+
+# exit on first non-zero exit
+set -e
+
+# generate/update xdg-dirs
+if type xdg-user-dirs-update  > /dev/null; then
+  xdg-user-dirs-update
+fi
+
+# add self to video group
+# to control backlight (monitor/keyboard)
+if ! (groups | grep video >/dev/null); then
+  echo "Adding self to video group..."
+  sudo gpasswd video -a $USER
+fi
+
+# install packages from AUR
+# - mons. multi-monitor setup utility
+# - font-symbola. to properly display symbols in terminal (especially to not break suckless/st)
+# - google-chrome. chromium-based browser
+# - pinentry-dmenu. pinentry program to be used by gpg for GUIs (especially compatible with suckless/dwm)
+# - jump. quick and fuzzy directly jumper
+# - jmtpfs. FUSE and libmtp based filesystem for accessing MTP (Media Transfer Protocol) devices
+# - pmount. mount removable devices as normal user. used by nnn's nmount plugin
+if type makepkg  > /dev/null; then
+  echo "Installing packages from AUR..."
+  AUR_DIR="$HOME/.aur"
+  mkdir -p "$AUR_DIR"
+
+  packages=( "mons" "font-symbola" "google-chrome" "pinentry-dmenu" "jump" "jmtpfs" "pmount" )
+  for i in "${packages[@]}"; do
+    dir="$AUR_DIR/$i"
+    if [ ! -d "$dir" ]; then
+      echo "cloning $i from aur..."
+      git clone "https://aur.archlinux.org/$i.git" "$dir"
+      echo "installing $i..."
+      (cd "$dir" && makepkg --noconfirm -sirc)
+    fi
+  done
+fi
+
+# configure bluetooth
+if type bluetoothctl  > /dev/null; then
+  # ensure group
+  if ! (groups | grep lp >/dev/null); then
+    echo "Adding self to lp group..."
+    sudo gpasswd lp -a $USER
+  fi
+fi
+
+# configure docker
+if type docker  > /dev/null && ! (groups | grep docker >/dev/null); then
+  # ensure group
+  if ! (groups | grep docker >/dev/null); then
+    echo "Adding self to docker group..."
+    sudo gpasswd docker -a $USER
+  fi
+fi
+
+# build dmenu
+if ! type dmenu  > /dev/null; then
+  echo "building dmenu..."
+  sudo make -C "$HOME/.apps/dmenu-4.9" clean install
+fi
+
+# build st
+if ! type st  > /dev/null; then
+  echo "building st..."
+  sudo make -C "$HOME/.apps/st-0.8.2" clean install
+fi
+
+# build slock
+if ! type slock  > /dev/null; then
+  echo "ensuring group:nogroup"
+  # TODO: only run if there are no such group
+  # sudo groupadd nogroup
+  echo "building slock..."
+  sudo make -C "$HOME/.apps/slock-1.4" clean install
+fi
+
+# build dwm
+if ! type dwm  > /dev/null; then
+  echo "building dwm..."
+  sudo make -C "$HOME/.apps/dwm-6.2" clean install
+fi
+
+# bootstrap tmux
+if type tmux  > /dev/null; then
+  echo "bootstraping tmux..."
+  # FIXME: this doesn't work on fresh machines
+  # still need to open tmux and prefix + I (capital I to install)
+  # install plugins
+  # . "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+fi
+
+# bootstrap nvim
+if type nvim  > /dev/null; then
+  echo "bootstraping nvim..."
+  nvim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+fi
+
+# install antigen
+if [ ! -f $HOME/.antigen.zsh ]; then
+  echo "installing antigen..."
+  curl -L -s git.io/antigen > $HOME/.antigen.zsh
+fi
+
+# configure nnn
+if type nnn > /dev/null; then
+  # download buil-in plugins
+  curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
+fi
+
+# TODO: configure mons (as daemon)
+
+# yadm bootstrap
+if type yadm  > /dev/null; then
+  echo "Updating the yadm repo origin to SSH"
+  yadm remote set-url origin "git@github.com:enometsys/dotfiles.git"
+fi
