@@ -149,6 +149,10 @@ Factory defaults are 123456 for normal user and 12345678 for admin user.
 
 $ gpg --card-edit
 gpg/card> admin
+# [kdf-setup](https://developers.yubico.com/PGP/YubiKey_5.2.3_Enhancements_to_OpenPGP_3.4.html) prevents plain text PIN from being sent over USB
+gpg/card> kdf-setup
+# first change Admin PIN (3), then change PIN (1)
+# Note that PIN does not have to be numeric
 gpg/card> passwd
 
 # Set some information
@@ -179,6 +183,14 @@ gpg> keytocard
 Your selection? 3
 
 gpg> save
+```
+
+###### Touch policy for the yubikey can be configured as follows
+
+```sh
+$ ykman openpgp set-touch SIG FIXED
+$ ykman openpgp set-touch ENC FIXED
+$ ykman openpgp set-touch AUT FIXED
 ```
 
 ###### Verify that the keys were moved. Now they should be marked as ssd> indicating they are stubs for a smartcard key.
