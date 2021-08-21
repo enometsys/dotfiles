@@ -11,3 +11,6 @@
 
 [pull]
 	rebase = false
+
+[tag]
+	forceSignAnnotated = true
