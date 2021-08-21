@@ -162,6 +162,14 @@ if [ -t 0 ]; then
   # enable ssh support
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   gpgconf --launch gpg-agent
+
+  # Although all GnuPG components try to start the gpg-agent as needed, 
+  # this is not possible for the ssh support because ssh does not know about it. 
+  # Thus if no GnuPG tool which accesses the agent has been run, 
+  # there is no guarantee that ssh is able to use gpg-agent for authentication
+  # below is run to start gpg-agent so as to make ssh support possible if
+  # ssh features are invoked before any gpg-agent-needed ops are run (e.g. immediateley after reboot)
+  echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
 fi
 
 #------------------------------
