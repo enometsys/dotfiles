@@ -208,12 +208,23 @@ fi
 #------------------------------
 # configure androi-studio 
 if type android-studio  > /dev/null; then
+  export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+  PATH=$PATH:$ANDROID_SDK_ROOT/tools; PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
   # fix for https://issuetracker.google.com/issues/36975466
   export _JAVA_AWT_WM_NONREPARENTING=1
   # alias android-studio="_JAVA_AWT_WM_NONREPARENTING=1 android-studio"
 
   # for capacitor hybrid runtime
-  CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
+  export CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
+fi
+
+#------------------------------
+# please.build
+#------------------------------
+# add completion
+if type plz  > /dev/null; then
+  source <(plz --completion_script)
 fi
 
 #-----------------------------
