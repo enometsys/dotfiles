@@ -73,8 +73,8 @@ fi
 # build slock
 if ! type slock  > /dev/null; then
   echo "ensuring group:nogroup"
-  # TODO: only run if there are no such group
-  # sudo groupadd nogroup
+  sudo groupadd nogroup || true
+
   echo "building slock..."
   sudo make -C "$HOME/.apps/slock-1.4" clean install
 fi
