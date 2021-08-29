@@ -4,7 +4,7 @@ SPACING="  "
 DIVIDER="$SPACING|$SPACING"
 
 function print_network {
-  wifi_status=$( nmcli | grep -e '^wl.*0:' | cut -d' ' -f2 )
+  wifi_status=$( nmcli | grep -e '^wl.*:' | cut -d':' -f2 | sed -r 's/connected to//' )
 
   if [[ $wifi_status == "disconnected" ]]; then
     echo -e "offline$DIVIDER"
