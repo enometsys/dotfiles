@@ -237,19 +237,20 @@ set foldenable
 set foldlevelstart=0               
 " 10 nested fold max
 set foldnestmax=10                  
-" fold based on indent level
-" set foldmethod=syntax               
-set foldmethod=expr
-  \ foldexpr=lsp#ui#vim#folding#foldexpr()
-  \ foldtext=lsp#ui#vim#folding#foldtext()
+" fold methods
+" set foldmethod=indent
+set foldmethod=syntax
+" set foldmethod=expr
+"   \ foldexpr=lsp#ui#vim#folding#foldexpr()
+"   \ foldtext=lsp#ui#vim#folding#foldtext()
 " space open/closes folds
 nnoremap <space> za
 " remember folds
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * silent! mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
+" augroup remember_folds
+"   autocmd!
+"   autocmd BufWinLeave * silent! mkview
+"   autocmd BufWinEnter * silent! loadview
+" augroup END
 
 
 " ================================
