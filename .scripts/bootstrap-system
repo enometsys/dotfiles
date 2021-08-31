@@ -112,7 +112,7 @@ if type pacman  > /dev/null; then
     xdg-user-dirs \
     nautilus udisks2 udevil gvfs-mtp \
     exfat-utils ntfs-3g \
-    ripgrep fd jq yq tree \
+    ripgrep fd jq tree \
     tar unrar unzip \
     neovim \
     zathura zathura-pdf-mupdf \
