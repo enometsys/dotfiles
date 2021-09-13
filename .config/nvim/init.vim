@@ -311,3 +311,14 @@ set statusline+=\ %p%%
 set statusline+=\ %l:%c
 set statusline+=\ (%L)
 set statusline+=\ 
+
+
+" ================================
+"         Autocommands
+" ================================
+
+augroup Linting
+	autocmd!
+  autocmd FileType vue setlocal makeprg=yarn\ lint
+  autocmd FileType javascript setlocal makeprg=yarn\ lint
+augroup END
