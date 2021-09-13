@@ -6,7 +6,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[] = {
-  "Meslo LG M DZ:pixelsize=10:style=Bold:antialias=true:autohint=true",
+  "Meslo LG M DZ:pixelsize=18:style=Bold:antialias=true:autohint=true",
   "Symbola",
 	"Liberation Mono"
 };
