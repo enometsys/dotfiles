@@ -157,3 +157,27 @@ Then, use `usb_modeswitch` to reset the adapter:
 ```sh
 usb_modeswitch -R -v <vendor ID> -p <product ID>
 ```
+
+### Apps
+
+#### Google Chrome
+
+Scaling
+```sh
+# scaling must be adjust for MBP12,1
+gsettings reset org.gnome.desktop.interface text-scaling-factor
+# gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+```
+
+Extensions:
+[Adblock](https://chrome.google.com/webstore/detail/gighmmpiobklfepjocnamgkkbiglidom)
+[Vimium](https://chrome.google.com/webstore/detail/dbepggeogbaibhgnhhndojpepiihcmeb) for vim-like keyboard control
+[xBrowserSync](https://chrome.google.com/webstore/detail/xbrowsersync/lcbjdhceifofjlpecfpeimnnphbcjgnc)
+[Goole Docs Offline](https://chrome.google.com/webstore/detail/ghbmnnjooekpmoecnnnilnnbdlolhkhi)
+[Office Editting for Docs,Sheets & Slides](https://chrome.google.com/webstore/detail/gbkeegbaiigmenfmjfclcdgdpimamgkj)
+[Tab for a Cause](https://chrome.google.com/webstore/detail/gibkoahgjfhphbmeiphbcnhehbfdlcgo)
+[JSON Formatter](https://chrome.google.com/webstore/detail/bcjindcccaagfpapjjmafapmmgkkhgoa) for formatting raw json web response
+[Loom for Chrome](https://chrome.google.com/webstore/detail/liecbddmkiiihnedobmlmillhodjkdmb) for screen recording
+[WebToEpub](https://chrome.google.com/webstore/detail/akiljllkbielkidmammnifcnibaigelm)
+[Wizdler](https://chrome.google.com/webstore/detail/wizdler/oebpmncolmhiapingjaagmapififiakb) for web SOAP client (for philhealth testing)
+[Resolution Zoom](https://chrome.google.com/webstore/detail/resolution-zoom/enjjhajnmggdgofagbokhmifgnaophmh)
