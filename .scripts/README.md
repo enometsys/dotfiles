@@ -106,7 +106,8 @@ https://wiki.archlinux.org/title/Mac
 https://github.com/patjak/bcwc_pcie/wiki/Installation#get-started-on-arch
 
 Install `linux-headers` package
-Install `bcwc-pcie-git` and `facetimehd-firmware` from AUR
+Install `facetimehd-firmware` from AUR
+Install `bcwc-pcie-git` from AUR
 
 Configure config files
 
@@ -164,12 +165,15 @@ usb_modeswitch -R -v <vendor ID> -p <product ID>
 
 Scaling
 ```sh
+# resetting GTK scaling
+export GDK_DPI_SCALE=1
 # scaling must be adjust for MBP12,1
 gsettings reset org.gnome.desktop.interface text-scaling-factor
 # gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 ```
 
 Extensions:
+[All Black Theme](https://chrome.google.com/webstore/detail/all-black-full-dark-theme/mkplpffahhkjfocfbfapcemhhkgmljpn)
 [Adblock](https://chrome.google.com/webstore/detail/gighmmpiobklfepjocnamgkkbiglidom)
 [Vimium](https://chrome.google.com/webstore/detail/dbepggeogbaibhgnhhndojpepiihcmeb) for vim-like keyboard control
 [xBrowserSync](https://chrome.google.com/webstore/detail/xbrowsersync/lcbjdhceifofjlpecfpeimnnphbcjgnc)
