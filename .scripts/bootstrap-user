@@ -94,6 +94,12 @@ if type tmux  > /dev/null; then
   # . "$HOME/.tmux/plugins/tpm/bin/install_plugins"
 fi
 
+# configure nnn
+if type nnn > /dev/null; then
+  # download buil-in plugins
+  curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
+fi
+
 # bootstrap nvim
 if type nvim  > /dev/null; then
   echo "bootstraping nvim..."
@@ -104,12 +110,6 @@ fi
 if [ ! -f $HOME/.antigen.zsh ]; then
   echo "installing antigen..."
   curl -L -s git.io/antigen > $HOME/.antigen.zsh
-fi
-
-# configure nnn
-if type nnn > /dev/null; then
-  # download buil-in plugins
-  curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
 fi
 
 # TODO: configure mons (as daemon)
