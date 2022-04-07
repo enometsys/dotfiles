@@ -1,0 +1,11 @@
+[Unit]
+Description=Himalaya new messages notifier
+
+[Service]
+ExecStart=/usr/bin/himalaya notify
+Environment=RUST_LOG=debug
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

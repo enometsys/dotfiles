@@ -1,0 +1,32 @@
+name = "John Leonard Tubig"
+downloads-dir = "~/Downloads"
+signature = """
+Regards,
+
+John Leonard Tubig
+Product Engineer | MYCURE
+nad@mycure.md
+"""
+default-page-size = 20
+notify-cmd = "dunstify -r 2345 -i mail-unread-symbolic.symbolic -t 5000 <subject> \n<sender>"
+watch-cmds = [ "/usr/bin/himalaya --output json search not seen | jq -r '.response|length' > /tmp/himalaya-counter" ]
+
+[gmail]
+default = true
+email = "tubig.jlu@gmail.com"
+pgp-encrypt-cmd = "gpg -o - -eqar"
+pgp-decrypt-cmd="gpg -dq"
+
+smtp-host = "smtp.gmail.com"
+smtp-port = 465
+smtp-login = "tubig.jlu@gmail.com"
+smtp-passwd-cmd = "pass show Email/apppwd.gmail.com/tubig.jlu@gmail.com | head -n 1"
+
+imap-host = "imap.gmail.com"
+imap-port = 993
+imap-login = "tubig.jlu@gmail.com"
+imap-passwd-cmd = "pass show Email/apppwd.gmail.com/tubig.jlu@gmail.com | head -n 1"
+
+[gmail.mailboxes]
+sent = "[Gmail]/Sent Mail"
+draft = "[Gmail]/Drafts"

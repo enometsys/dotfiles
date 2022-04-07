@@ -95,6 +95,9 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " golang helpers
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+  " --- APPS
+  Plug 'soywod/himalaya', {'rtp': 'vim'}
+
   call plug#end()
 
   " -- VSCode theme
@@ -128,6 +131,9 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
 
   " -- lsp
   let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
+
+  " -- Himalaya
+  let g:himalaya_mailbox_picker = 'fzf'
 endif
 
 

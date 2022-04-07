@@ -21,6 +21,13 @@ function print_video {
   echo -e "$vendor$DIVIDER"
 }
 
+function print_mail {
+  counter_file="/tmp/himalaya-counter"
+  touch -a $counter_file
+  unread=$( cat $counter_file )
+  echo -e "Mail U:$unread$DIVIDER"
+}
+
 function print_bluetooth {
   device="n/a"
   # FIXME: blueoothctl just hangs if bluetooth.service isn't running
@@ -58,7 +65,8 @@ function print_date {
 
 function print_status {
   # status="$( print_network )$( print_video )$( print_volume )$( print_battery )$( print_date )$SPACING"
-  status="$( print_network )$( print_bluetooth )$( print_volume )$( print_battery )$( print_date )$SPACING"
+  # status="$( print_network )$( print_bluetooth )$( print_volume )$( print_battery )$( print_date )$SPACING"
+  status="$( print_network )$( print_mail )$( print_bluetooth )$( print_volume )$( print_battery )$( print_date )$SPACING"
   echo -e "$status"
 }
 
