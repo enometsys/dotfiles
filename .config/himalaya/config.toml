@@ -1,14 +1,15 @@
 name = "John Leonard Tubig"
 downloads-dir = "~/Downloads"
+signature-delimiter = ""
 signature = """
 Regards,
-
 John Leonard Tubig
 Product Engineer | MYCURE
 nad@mycure.md
 """
 default-page-size = 20
-notify-cmd = "dunstify -r 2345 -i mail-unread-symbolic.symbolic -t 5000 <subject> \n<sender>"
+notify-cmd = "dunstify -r 2345 -i mail-unread-symbolic.symbolic -t 5000 <sender> \n<subject>"
+notify-query = "not seen"
 watch-cmds = [ "/usr/bin/himalaya --output json search not seen | jq -r '.response|length' > /tmp/himalaya-counter" ]
 
 [gmail]
