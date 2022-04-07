@@ -25,6 +25,7 @@ function print_mail {
   counter_file="/tmp/himalaya-counter"
   touch -a $counter_file
   unread=$( cat $counter_file )
+  unread=${unread:-0}
   echo -e "Mail U:$unread$DIVIDER"
 }
 
