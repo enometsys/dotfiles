@@ -22,6 +22,7 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
  
   " Protect leaks when editting pass(1) files
   let g:plug_shallow = 0 " work-around until shallow option can be set per plugin
+  " secure usage of `$pass <command>` that uses the editor
   Plug 'https://dev.sanctum.geek.nz/code/vim-redact-pass.git'
 
   " --- NAVIGATION
