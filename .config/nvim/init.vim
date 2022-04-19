@@ -96,7 +96,11 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " golang helpers
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+  " protobuf
+  Plug 'uarun/vim-protobuf'
+
   " --- APPS
+
   Plug 'soywod/himalaya', {'rtp': 'vim'}
 
   call plug#end()
