@@ -11,6 +11,7 @@
 #     - xautolock
 #     - statusbar updater
 #     - battery monitor
+#   configure hidpi
 #   update bg
 #   start dwm
 
@@ -62,6 +63,10 @@ trap 'rm $logoutlocpath &>/dev/null' EXIT
 
 # start dwm (restart dwm without loosing x session)
 while [ ! -f "$logoutlocpath" ]; do
+  # hidpi
+  # export GDK_DPI_SCALE=0.5
+  export GDK_DPI_SCALE=1
+
   # desktop bg
   feh --bg-scale "$HOME/.bg.jpg"
   
