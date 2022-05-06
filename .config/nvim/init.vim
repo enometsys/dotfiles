@@ -90,14 +90,19 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
 
   " --- LANGUAGE-SPECIFIC
  
+  " markdown
+  Plug 'godlygeek/tabular'
+  Plug 'preservim/vim-markdown'
+
   " emmet expansion
   Plug 'mattn/emmet-vim'
 
   " golang helpers
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
   " protobuf
-  Plug 'uarun/vim-protobuf'
+  " Plug 'uarun/vim-protobuf'
+  Plug 'wfxr/protobuf.vim'
 
   " --- APPS
 
@@ -125,8 +130,14 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
       \ '<c-v>': 'vsplit' }
 
   " -- Vim Markdown
+  let g:vim_markdown_folding_style_pythonic = 1
+  let g:vim_markdown_toc_autofit = 1
   let g:vim_markdown_conceal = 0
   let g:vim_markdown_conceal_code_blocks = 0
+  let g:vim_markdown_frontmatter = 1
+  let g:vim_markdown_new_list_item_indent = 2
+  " let g:vim_markdown_auto_insert_bullets = 0
+  " let g:vim_markdown_new_list_item_indent = 0
   
   " -- Markdown Preview
   let g:mkdp_refresh_slow = 1
@@ -257,11 +268,11 @@ set foldmethod=syntax
 " space open/closes folds
 nnoremap <space> za
 " remember folds
-" augroup remember_folds
-"   autocmd!
-"   autocmd BufWinLeave * silent! mkview
-"   autocmd BufWinEnter * silent! loadview
-" augroup END
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * silent! mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
 
 
 " ================================
