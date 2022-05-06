@@ -1,0 +1,65 @@
+#!/usr/bin/sh
+
+set -e
+
+# Implements Aurweb RPC interface
+# https://wiki.archlinux.org/title/Aurweb_RPC_interface
+
+# convenience logging functions
+log () {
+	! ((quiet)) && >&2 echo "$@"
+}
+
+# log message and kill process
+die () {
+	log "$@"
+	exit 1
+}
+
+# print help message
+helpmsg () {
+	cat << EOF
+aur_search [OPTION] <search_string>
+
+Search the aur for packages
+
+OPTIONS
+-h, --help          Print this help message
+-q, --quiet         Quiet logging
+--by                Search a package by specific field [default: name]
+EOF
+}
+
+# parse arguments
+quiet=0
+by_field=name
+searchargs=()
+while (( $# )); do
+	case $1 in
+		--help|-h)
+			helpmsg
+			exit
+			;;
+		--quiet|-q)
+			quiet=1
+			;;
+		--by)
+			shift
+			by_field="$1"
+			;;
+		*)
+			searchargs+=("$1")
+			;;
+	esac
+	shift
+done
+
+# require search args
+(( ${#searchargs[@]} == 1 )) || die 'Expected searchstring. See --help.'
+
+# search the aur via AUR JSON RPC
+xhs aur.archlinux.org/rpc \
+  v==5 \
+  type==search \
+  by==$by_field \
+  arg=="${searchargs[0]}"
