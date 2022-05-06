@@ -1,6 +1,4 @@
-#------------------------------
-# History
-#------------------------------
+# ------ history
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -16,31 +14,36 @@ setopt INC_APPEND_HISTORY
 # run right away so that it can be verified
 setopt HISTVERIFY
 
-#------------------------------
-# Keybindings
-#------------------------------
+# ------ Keybindings
 # Enforce vi keybindings
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-#------------------------------
-# Autocomplete
-#------------------------------
+# ------ Autocomplete
 # Configure autocomplete
 zstyle :compinstall filename $HOME/.zshrc
 autoload -Uz compinit && compinit
 
-#------------------------------
-# Binaries
-#------------------------------
-# add local bin in path
-if [ -d "$HOME/.local/bin" ]; then
-  export PATH="$HOME/.local/bin:$PATH"
+# ------ Syntax Highlighting
+zsh_syntax_highlighting_path="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -f "$zsh_syntax_highlighting_path" ]; then 
+  source "$zsh_syntax_highlighting_path"
 fi
 
-#------------------------------
-# n/vim
-#------------------------------
+# ------ Colors
+alias diff='diff --color=auto'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
+alias ls='ls --color=auto'
+export LESS='-R --use-color -Dd+r$Du+b'
+
+# ------ Local Binaries
+# add local bin in path
+if [[ ! "$PATH" == *$USER/.local/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.local/bin"
+fi
+
+# ------ Editor
 # Use vim as default editor
 if type vim  > /dev/null; then                                                                                                                                                  
   export EDITOR=vim
@@ -54,17 +57,10 @@ if type nvim  > /dev/null; then
   export VISUAL=nvim
 fi
 
-#------------------------------
-# jump
-#------------------------------
-if type jump  > /dev/null; then
-  eval "$(jump shell zsh)"
-fi
-
-#------------------------------
-# nnn
-#------------------------------
+# ------ Navigation
 if type nnn  > /dev/null; then
+  # TODO: autodownload default nnn plugins if not exist
+
   # hidden files on top
   export LC_COLLATE="C"
 
@@ -118,9 +114,11 @@ if type nnn  > /dev/null; then
   }
 fi
 
-#------------------------------
-# fzf
-#------------------------------
+if type jump  > /dev/null; then
+  eval "$(jump shell zsh)"
+fi
+
+# ------ Filter
 if [ -f ~/.fzf.zsh ]; then 
   # set FZF default command
   export FZF_DEFAULT_COMMAND='fd --hidden --type f --type l --exclude ".git"'
@@ -144,16 +142,12 @@ if [ -f ~/.fzf.zsh ]; then
   }
 fi
 
-#------------------------------
-# xclip
-#------------------------------
+# ------ Clipboard
 if type xclip  > /dev/null; then
 	alias xclip="xclip -selection clipboard"
 fi
 
-#-----------------------------
-# gpg
-#-----------------------------
+# ------ Encryption
 # If stdin is a terminal
 if [ -t 0 ]; then
 	# Set GPG_TTY so gpg-agent knows where to prompt.  See gpg-agent(1)
@@ -172,125 +166,17 @@ if [ -t 0 ]; then
   echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
 fi
 
-#------------------------------
-# yarn
-#------------------------------
-# add global yarn bins in path
-if type yarn  > /dev/null; then
-	export PATH=$PATH:`yarn global bin`
+# ------ Environment loader (development)
+if type direnv  > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+asdf_path="/opt/asdf-vm/asdf.sh"
+if [ -f "$asdf_path" ]; then
+  . "$asdf_path"
 fi
 
-#------------------------------
-# deno
-#------------------------------
-# add deno bin in path
-if [ -d "$HOME/.deno/bin" ]; then
-  export PATH="$HOME/.deno/bin:$PATH"
+# ------ Prompt
+if type starship  > /dev/null; then
+  eval "$(starship init zsh)"
 fi
-
-#------------------------------
-# golang
-#------------------------------
-# add golang bins in path
-if [ -d "$HOME/go/bin" ]; then
-  export PATH="$HOME/go/bin:$PATH"
-fi
-
-#------------------------------
-# rust
-#------------------------------
-if [ -f "$HOME/.cargo/env" ]; then 
-  . "$HOME/.cargo/env"
-fi
-
-#------------------------------
-# android
-#------------------------------
-# configure androi-studio 
-if type android-studio  > /dev/null; then
-  export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-  PATH=$PATH:$ANDROID_SDK_ROOT/tools; PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-
-  # fix for https://issuetracker.google.com/issues/36975466
-  export _JAVA_AWT_WM_NONREPARENTING=1
-  # alias android-studio="_JAVA_AWT_WM_NONREPARENTING=1 android-studio"
-
-  # for capacitor hybrid runtime
-  export CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
-fi
-
-#------------------------------
-# please.build
-#------------------------------
-# add completion
-if type plz  > /dev/null; then
-  source <(plz --completion_script)
-fi
-
-#-----------------------------
-# antigen
-#-----------------------------
-# configure antigen
-if [ -f $HOME/.antigen.zsh ]; then
-  source $HOME/.antigen.zsh
-  export NVM_LAZY_LOAD=true
-  export NVM_NO_USE=true
-  export NVM_AUTO_USE=true
-  antigen bundle lukechilds/zsh-nvm
-  antigen bundle zsh-users/zsh-syntax-highlighting
-  antigen apply
-fi
-
-#-----------------------------
-# Dircolors
-#-----------------------------
-LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
-export LS_COLORS
-
-#------------------------------
-# Prompt
-#------------------------------
-# print git info (if in git dir)
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:*' unstagedstr '?'
-zstyle ':vcs_info:git:*' formats '%F{magenta} %b %F{red}%c%u%f '
-
-build_prompt() {
-  # print username@hostname if in ssh
-  [[ "$SSH_CLIENT" ]] && echo -n "%F{yellow}%n%f at %F{green}%m%f "
-
-  # print username if in su mode
-  echo -n "%(!.%F{yellow}%n%f .)"
-
-  # print last directory in working directory
-  echo -n "%B%F{240}%1~%f%b "
-
-  # print git info
-  echo -n "${vcs_info_msg_0_}"
-
-  # print nodejs/javascript project info
-  if [[ -f package.json ]]; then
-    # print package version (if in directory with package.json)
-    local version
-    version="$(cat package.json | jq -r '.version // ""')"
-    [[ -n $version ]] && echo -n "📦 %B%F{red}v$version%f%b "      
-
-    # print nodejs version (if loaded)
-    if [[ -x "$(command -v node)" ]]; then
-      echo -n "%B%F{green}⬢ v$(node --version | sed -e 's/v//')%f%b "
-    fi
-  fi
-
-  # print the "prompt" symbol on the next line
-  echo -n "\n"
-  echo -n "%1(j.%F{blue}✦%f.)"
-  echo -n "%(?.%F{green}➜.%F{red}➜%f) "
-}
-
-PROMPT='$(build_prompt)'
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
