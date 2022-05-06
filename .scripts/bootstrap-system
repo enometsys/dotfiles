@@ -1,130 +1,200 @@
 #!/bin/sh
 
-# Programs
+# exit on first non-zero exit
+set -e
+
+# packages
+packages=()
 
 ## Display
-# - `xf86-video-intel`, `mesa` for graphics support
-# - `xorg-server`, `xorg-xrandr` for rendering the x system
-# - `xorg-xinit` for starting the window manager
-# - `xorg-xsetroot` used by dwm to render statusbar
-# - `mesa-demos` used to test 3d rendering/gpu support (glxgears)
-# - `xorg-fonts`, `ttf-dejavu` used to render most fonts
-# - `xautolock` used for locking screen when inactive
-# - `cowsay` `fortune-mod` used to generate graphics in lock screen
+packages+=(
+  # for graphics support
+  "xf86-video-intel" "mesa"
+  # for rendering the x system
+  "xorg-server" "xorg-xrandr" 
+  # for starting the window manager
+  "xorg-xinit" 
+  # used by dwm to render statusbar
+  "xorg-xsetroot" 
+  # used to test 3d rendering/gpu support (glxgears)
+  "mesa-demos" 
+  # used to render most fonts
+  "xorg-fonts" "ttf-dejavu" 
+  # used for locking screen when inactive
+  "xautolock" 
+  # used to generate graphics in lock screen
+  "cowsay" "fortune-mod" 
+)
 
 ## Audio system
-# - `alsa-utils` low-level utilities to manage audio devices
-# - `pulseaudio-alsa`, `pulseaudio-bluetooth`, `pulseaudio-jack` higher level utility to manage audio devices
-# - `pavucontrol` frontend to pulseaudio
+packages+=(
+  # low-level utilities to manage audio devices
+  "alsa-utils" 
+  # higher level utility to manage audio devices
+  "pulseaudio-alsa" "pulseaudio-bluetooth" "pulseaudio-jack" 
+  # frontend to pulseaudio
+  "pavucontrol" 
+)
 
 ## Inputs
-# - `libnotify` `dunst` used to create/render desktop notifications
-# - `libinput`, `xbindkeys` used to bind actions in keyboard input
-# - `xdotool` used to simulate keyboard input
+packages+=(
+  # used to create/render desktop notifications
+  "libnotify" "dunst" 
+  # used to bind actions in keyboard input
+  "libinput" "xbindkeys" 
+  # used to simulate keyboard input
+  "xdotool" 
+)
 
 ## Power managment
-# - `acpilight` used to control keyboard backlight
-# - `acpi` used for power mgt, specifically to query battery status
-# - `powertop`, `thermald`, `cpupower` used to query and somewhat control machine status/power/cpu
-# - `tlp`, `tlp-rdw` used for automatic power mgt for laptops
+packages+=(
+  # used to control keyboard backlight
+  "acpilight" 
+  # used for power mgt, specifically to query battery status
+  "acpi" 
+  # used to query and somewhat control machine status/power/cpu
+  "powertop" "thermald" "cpupower" 
+  # used for automatic power mgt for laptops
+  "tlp" "tlp-rdw" 
+)
 
 ## Network managment
-# - `networkmanager` used to manage network profiles/interfaces
-# - `ufw` uncomplicated firewall
-# - `wget`, `curl`, `aria2` utility to download files from the network
-# - `rsync` used to move files around (event w/in a network)
-# - `openssh` ssh package
+packages+=(
+  # used to manage network profiles/interfaces
+  "networkmanager" 
+  # uncomplicated firewall
+  "ufw" 
+  # utility to download files from the network
+  "wget" "curl" "xh" "aria2" 
+  # used to move files around (event w/in a network)
+  "rsync" 
+  # ssh package
+  "openssh" 
+)
 
 ## Security
-# - `pass` password management using GPG
-# - `yubikey-manager` utility to managing yubikeys
+package+=(
+  # password management using GPG
+  "pass" 
+  # utility to managing yubikeys
+  "yubikey-manager" 
+)
 
 ## Bluetooth
-# - `bluez` bluetooth driver
-# - `bluez-utils` cli bluetooth frontend
-# - `blueman` GUI bluetooth frontend
+packages+=(
+  # bluetooth driver
+  "bluez" 
+  # cli bluetooth frontend
+  "bluez-utils" 
+  # GUI bluetooth frontend
+  "blueman" 
+)
 
 ## File system
-# - `xdg-user-dirs` utility to create XDG directorys in a user's home directory
-# - `nautilus` GUI file manager. TODO: remove after mastering nnn
-# - `udisks2`, `udevil` driver and utilities to mount removable devices
-# - `gvfs-mtp` utility to integrate mtp to file managers (together with jmtpfs, will enable mtp connection)
-# - `exfat-utils`, `ntfs-3g` utilities for managing windows file system (for dual boot and external harddrives)
-# - `ripgrep`, `fd` utility more convinient than `coreutils/find`
-# - `nnn` terminal-based file manager
+packages+=(
+  # utility to create XDG directorys in a user's home directory
+  "xdg-user-dirs" 
+  # GUI file manager. TODO: remove after mastering nnn
+  "nautilus" 
+  # driver and utilities to mount removable devices
+  "udisks2" 
+  # "udevil" 
+  # utility to integrate mtp to file managers (together with jmtpfs, will enable mtp connection)
+  "gvfs-mtp" 
+  # utilities for managing windows file system (for dual boot and external harddrives)
+  "exfat-utils" "ntfs-3g" 
+  # utility more convinient than "coreutils/find"
+  "ripgrep" "fd" 
+  # terminal-based file manager
+  "nnn" 
+)
 
 ## Terminal Utilities
-# - `zsh`, `zsh-completions` better altenative to bash
-# - `jq`, `yq` cli utility for managing json and yaml
-# - `tree` for rendeding directory tree as a tree (alternative to ls)
-# - `tar`, `unrar`, `unzip` utilities for managing compressed files
-# - `neovim` main file editor (will be set as both $EDITOR and $VISUAL)
-# - `bat` better `coreutils/cat` alternative
-# - `glib2` provides `gio trash` that is used by file managers (nnn)
-# - `htop` better `procps-ng/top` alternative
-# - `neofetch` for displaying system specs
-# - `man-db`, `man-pages` for managing man pages
-# - `xclip` for managing clipboard
-# - `tmux` terminal multiplexer
-# - `bc` calculator
+packages+=(
+  # df and du alternatives
+  "duf" "dust" 
+  # Process visualization tool
+  "bottom"
+  # Container-images visualization tool
+  "ctop" 
+  # better altenative to bash
+  "zsh" "zsh-completions" "zsh-syntax-highlighting"
+  # cli utility for managing json and yaml
+  "jo" "jq" "jless" "yq"
+  # CLI for exploring and arranging tabular data (e.g. csv, xlsx)
+  "visidata" "xsv" 
+  # for rendeding directory tree as a tree (alternative to ls)
+  "tree" 
+  # utilities for managing compressed files
+  "tar" "unrar" "unzip" 
+  # main file editor (will be set as both $EDITOR and $VISUAL)
+  "neovim" 
+  # better "coreutils/cat" alternative
+  "bat" 
+  # markdown terminal presentation
+  "glow" 
+  # provides "gio trash" that is used by file managers (nnn)
+  "glib2" 
+  # better "procps-ng/top" alternative
+  "htop" 
+  # for displaying system specs
+  "neofetch" 
+  # for managing man pages
+  "man-db" "man-pages" "tealdeer"
+  # for managing clipboard
+  "xclip" 
+  # terminal multiplexer
+  "tmux" 
+  # calculator
+  "bc" 
+  # email management
+  "himalaya" 
+  # data progress through a pipe
+  "pv" 
+  # chat client
+  "weechat" 
+)
 
 ## Media
-# - `scrot` for creating screen shots
-# - `feh` for rendering/viewing images
-# - `vlc` for playing videos
-# - `viu` for rendering images in terminal
-# - `zbar` for decoding qrcodes from different inputs (camera or file)
-# - `qrencode` for encoding files to QR code
-# - `zathura`, `zathura-pdf-mupdf` for viewing pdf, epubs
+packages+=(
+  # for creating screen shots
+  "scrot" "flameshot"
+  # screen recorder
+  "simplescreenrecorder"
+  # for rendering/viewing images
+  "feh"
+  # for playing videos
+  "vlc"
+  # for rendering images in terminal
+  "viu" "catimg"
+  # for decoding qrcodes from different inputs (camera or file)
+  "zbar"
+  # for encoding files to QR code
+  "qrencode"
+  # for viewing pdf, epubs
+  "zathura" "zathura-pdf-mupdf"
+  # music player
+  "cmus"
+)
 
 ## Development
-# - `git` VCS
-# - `github-cli` terminal-based workflow in github
-# - `docker` for container managment
-# - `go` golang cli
-# - `yarn` alternative nodejs package manager to npm
-# - `kubectl`, `kubectx` terminal interface to k8s clusters
-
+packages+=(
+  # VCS
+  "git"
+  # terminal-based workflow in github
+  "github-cli"
+  # for container managment
+  "docker" 
+  # terminal interface to k8s clusters. kubectx providers `kubens`
+  "kubectl" "kubectx" "k9s"
+  # env loader
+  "direnv"
+)
 
 # install packages using pacman (run as root)
 if type pacman  > /dev/null; then
-  echo "Installing system packages using pacman..."
-  pacman -Syu --noconfirm \
-    xf86-video-intel mesa  \
-    xorg-server xorg-xrandr xorg-xsetroot xorg-xinit \
-    mesa-demos \
-    acpi acpilight \
-    powertop thermald cpupower \
-    tlp tlp-rdw \
-    xorg-fonts ttf-dejavu \
-    xautolock cowsay fortune-mod \
-    libnotify dunst \
-    xbindkeys libinput xdotool \
-    networkmanager ufw \
-    wget curl aria2 \
-    rsync \
-    alsa-utils \
-    pulseaudio-alsa pulseaudio-bluetooth pulseaudio-jack pavucontrol \
-    openssh \
-    pass \
-    yubikey-manager \
-    bluez bluez-utils blueman \
-    xdg-user-dirs \
-    nautilus udisks2 udevil gvfs-mtp \
-    exfat-utils ntfs-3g \
-    ripgrep fd jq tree \
-    tar unrar unzip \
-    neovim \
-    zathura zathura-pdf-mupdf \
-    bat \
-    glib2 \
-    htop neofetch man-db man-pages \
-    zsh zsh-completions xclip tmux \
-    nnn bc \
-    scrot feh vlc viu zbar qrencode \
-    git github-cli docker \
-    go yarn \
-    kubectl kubectx
+  echo "Installing system packages using pacman: ${packages[@]}..."
+  pacman -Syu --noconfirm ${packages[@]}
 
   # check for supported cameras
   # v4l2-ctl --list-devices

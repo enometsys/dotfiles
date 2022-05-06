@@ -15,28 +15,42 @@ if ! (groups | grep video >/dev/null); then
   sudo gpasswd video -a $USER
 fi
 
-# install packages from AUR
-# - mons. multi-monitor setup utility
-# - font-symbola. to properly display symbols in terminal (especially to not break suckless/st)
-# - google-chrome. chromium-based browser
-# - pinentry-dmenu. pinentry program to be used by gpg for GUIs (especially compatible with suckless/dwm)
-# - jump. quick and fuzzy directly jumper
-# - jmtpfs. FUSE and libmtp based filesystem for accessing MTP (Media Transfer Protocol) devices
-# - pmount. mount removable devices as normal user. used by nnn's nmount plugin
 if type makepkg  > /dev/null; then
   echo "Installing packages from AUR..."
   AUR_DIR="$HOME/.aur"
   mkdir -p "$AUR_DIR"
 
-  packages=( "mons" "font-symbola" "google-chrome" "pinentry-dmenu" "jump" "jmtpfs" "pmount" )
+  packages=(
+    # multi-monitor setup utility
+    "mons"
+    # to properly display symbols in terminal (especially to not break suckless/st)
+    "font-symbola"
+    # chromium-based browser
+    "brave-bin"
+    "google-chrome"
+    # pinentry program to be used by gpg for GUIs (especially compatible with suckless/dwm)
+    "pinentry-dmenu"
+    # quick and fuzzy directly jumper
+    "jump"
+    # FUSE and libmtp based filesystem for accessing MTP (Media Transfer Protocol) devices
+    "jmtpfs"
+    # mount removable devices as normal user. used by nnn's nmount plugin
+    "pmount"
+    # drag and drop utility via CLI
+    "dragon-drop"
+    # Tool manager
+    "asdf-vm"
+  )
+  
   for i in "${packages[@]}"; do
     dir="$AUR_DIR/$i"
     if [ ! -d "$dir" ]; then
       echo "cloning $i from aur..."
       git clone "https://aur.archlinux.org/$i.git" "$dir"
-      echo "installing $i..."
-      (cd "$dir" && makepkg --noconfirm -sirc)
     fi
+    # TODO: check if already installed
+    echo "installing $i..."
+    (cd "$dir" && makepkg --noconfirm -sirc)
   done
 fi
 
@@ -106,16 +120,21 @@ if type nvim  > /dev/null; then
   nvim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
 fi
 
-# install antigen
-if [ ! -f $HOME/.antigen.zsh ]; then
-  echo "installing antigen..."
-  curl -L -s git.io/antigen > $HOME/.antigen.zsh
-fi
-
 # TODO: configure mons (as daemon)
 
 # yadm bootstrap
 if type yadm  > /dev/null; then
   echo "Updating the yadm repo origin to SSH"
   yadm remote set-url origin "git@github.com:enometsys/dotfiles.git"
+fi
+
+# configure asdf
+asdf_path="/opt/asdf-vm/asdf.sh"
+if [ -f "$asdf_path" ]; then
+  # initialize asdf
+  . "$asdf_path"
+
+  # install and configure direnv plugin (https://github.com/asdf-community/asdf-direnv)
+  asdf plugin-add direnv
+  asdf direnv setup --shell zsh --version system
 fi
