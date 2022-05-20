@@ -62,7 +62,7 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   Plug 'jiangmiao/auto-pairs'
 
   " fuzzy find operator
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
   " preview markdown files in browser
@@ -143,6 +143,7 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   let g:mkdp_refresh_slow = 1
 
   " -- FZF
+  " [Buffers] Jump to the existing window if possible
   let g:fzf_buffers_jump = 1
 
   " -- lsp
