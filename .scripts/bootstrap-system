@@ -183,6 +183,8 @@ packages+=(
   "git"
   # terminal-based workflow in github
   "github-cli"
+  # git diff syntax highlighter
+  "git-delta"
   # for container managment
   "docker" 
   # terminal interface to k8s clusters. kubectx providers `kubens`
