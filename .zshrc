@@ -116,23 +116,23 @@ if type nnn  > /dev/null; then
   }
 fi
 
-if type jump  > /dev/null; then
-  eval "$(jump shell zsh)"
+if type zoxide  > /dev/null; then
+  eval "$(zoxide init zsh)"
 fi
 
 # ------ Filter
-if [ -f ~/.fzf.zsh ]; then 
-  # set FZF default command
-  export FZF_DEFAULT_COMMAND='fd --hidden --type f --type l --exclude ".git"'
-  
-  # for ubuntu, fd is packaged as fdfind
-  if type fdfind  > /dev/null; then
-    alias fd="fdfind"
-    export FZF_DEFAULT_COMMAND='fdfind --hidden --type f --type l --exclude ".git"'
+if type fzf  > /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50%'
+  # export FZF_DEFAULT_OPTS='-m --height 50% --border'
+
+  if [ -f "/usr/share/fzf/key-bindings.zsh" ]; then 
+    source "/usr/share/fzf/key-bindings.zsh"
   fi
 
-  # enable fzf
-  source ~/.fzf.zsh
+  if [ -f "/usr/share/fzf/completion.zsh" ]; then 
+    source "/usr/share/fzf/completion.zsh"
+  fi
 
   # fkill function
   function fkill() {
