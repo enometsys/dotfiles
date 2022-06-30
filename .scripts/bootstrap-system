@@ -70,6 +70,8 @@ packages+=(
   "rsync" 
   # ssh package
   "openssh" 
+  # dig alternative
+  "dog"
 )
 
 ## Security
@@ -107,12 +109,24 @@ packages+=(
   "ripgrep" "fd" 
   # terminal-based file manager
   "nnn" 
+  # smarter cd command
+  "zoxide"
+  # df and du alternatives
+  "duf" "dust" 
+  # for rendeding directory tree as a tree (alternative to ls)
+  "tree" 
+  # provides "gio trash" that is used by file managers (nnn)
+  "glib2" 
+  # env loader
+  "direnv"
 )
 
 ## Terminal Utilities
 packages+=(
-  # df and du alternatives
-  "duf" "dust" 
+  # terminal prompt
+  "starship"
+  # fuzzy finder
+  "fzf"
   # Process visualization tool
   "bottom"
   # Container-images visualization tool
@@ -123,8 +137,8 @@ packages+=(
   "jo" "jq" "jless" "yq"
   # CLI for exploring and arranging tabular data (e.g. csv, xlsx)
   "visidata" "xsv" 
-  # for rendeding directory tree as a tree (alternative to ls)
-  "tree" 
+  # for viewing pdf, epubs
+  "zathura" "zathura-pdf-mupdf"
   # utilities for managing compressed files
   "tar" "unrar" "unzip" 
   # main file editor (will be set as both $EDITOR and $VISUAL)
@@ -133,8 +147,6 @@ packages+=(
   "bat" 
   # markdown terminal presentation
   "glow" 
-  # provides "gio trash" that is used by file managers (nnn)
-  "glib2" 
   # better "procps-ng/top" alternative
   "htop" 
   # for displaying system specs
@@ -161,18 +173,16 @@ packages+=(
   "scrot" "flameshot"
   # screen recorder
   "simplescreenrecorder"
-  # for rendering/viewing images
-  "feh"
   # for playing videos
   "vlc"
+  # for rendering/viewing images
+  "feh"
   # for rendering images in terminal
-  "viu" "catimg"
+  "chafa" "viu" "catimg"
   # for decoding qrcodes from different inputs (camera or file)
   "zbar"
   # for encoding files to QR code
   "qrencode"
-  # for viewing pdf, epubs
-  "zathura" "zathura-pdf-mupdf"
   # music player
   "cmus"
 )
@@ -181,16 +191,12 @@ packages+=(
 packages+=(
   # VCS
   "git"
-  # terminal-based workflow in github
-  "github-cli"
   # git diff syntax highlighter
   "git-delta"
   # for container managment
   "docker" 
   # terminal interface to k8s clusters. kubectx providers `kubens`
   "kubectl" "kubectx" "k9s"
-  # env loader
-  "direnv"
 )
 
 # install packages using pacman (run as root)

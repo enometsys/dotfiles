@@ -30,15 +30,13 @@ if type makepkg  > /dev/null; then
     "google-chrome"
     # pinentry program to be used by gpg for GUIs (especially compatible with suckless/dwm)
     "pinentry-dmenu"
-    # quick and fuzzy directly jumper
-    "jump"
     # FUSE and libmtp based filesystem for accessing MTP (Media Transfer Protocol) devices
     "jmtpfs"
     # mount removable devices as normal user. used by nnn's nmount plugin
     "pmount"
     # drag and drop utility via CLI
     "dragon-drop"
-    # Tool manager
+    # devtools version manager
     "asdf-vm"
   )
   
