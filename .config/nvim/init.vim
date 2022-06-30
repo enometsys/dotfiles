@@ -38,14 +38,14 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " vscode-like color scheme
   Plug 'tomasiser/vim-code-dark'
 
-  " preview colors in source code
-  Plug 'ap/vim-css-color'
-
   " display vertical bars on indentation levels
   Plug 'Yggdroot/indentLine'
 
   " --- UTILS
  
+  " editorconfig
+  Plug 'editorconfig/editorconfig-vim'
+
   " unix utils (mostly fs)
   Plug 'tpope/vim-eunuch'
 
@@ -61,20 +61,19 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " insert or delete brackets, parens, quotes in pair
   Plug 'jiangmiao/auto-pairs'
 
+  " navigation
+  Plug 'nanotee/zoxide.vim'
+
   " fuzzy find operator
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
   " preview markdown files in browser
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
 
-  " renamer
-  Plug 'dkprice/vim-easygrep'
+  " preview colors in source code
+  Plug 'ap/vim-css-color'
 
   " --- LSP
- 
-  " language packs (basic syntax highlighting)
-  Plug 'sheerun/vim-polyglot'
 
   " lsp
   Plug 'prabirshrestha/vim-lsp'
@@ -83,16 +82,19 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " autocomplete
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
+ 
+  " language packs (basic syntax highlighting)
+  Plug 'sheerun/vim-polyglot'
 
   " snippets
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
-
-  " --- LANGUAGE-SPECIFIC
  
   " markdown
-  Plug 'godlygeek/tabular'
   Plug 'preservim/vim-markdown'
+
+  " formatting tables using tabs
+  Plug 'godlygeek/tabular'
 
   " emmet expansion
   Plug 'mattn/emmet-vim'
@@ -104,9 +106,10 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " Plug 'uarun/vim-protobuf'
   Plug 'wfxr/protobuf.vim'
 
-  " --- APPS
+  " kotlin
+  Plug 'udalov/kotlin-vim'
 
-  Plug 'soywod/himalaya', {'rtp': 'vim'}
+  " --- APPS
 
   call plug#end()
 
@@ -143,14 +146,13 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   let g:mkdp_refresh_slow = 1
 
   " -- FZF
-  " [Buffers] Jump to the existing window if possible
+  " jump to the existing window if possible
   let g:fzf_buffers_jump = 1
+  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.5, 'relative': v:true, 'yoffset': 1.0 } }
 
-  " -- lsp
-  let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
-
-  " -- Himalaya
-  let g:himalaya_mailbox_picker = 'fzf'
+  " -- LSP
+  " disable diagnostics support
+  let g:lsp_diagnostics_enabled = 0
 endif
 
 
@@ -289,16 +291,16 @@ hi Search cterm=NONE ctermfg=White ctermbg=DarkYellow
 " turn off search highlight using \<space>
 nnoremap <leader><space> :nohlsearch<CR>
 
-" -- ripgrep
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-  \   <bang>0)
+" every time we invoke Rg, FZF + ripgrep will not consider filename as a match in Vim.
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
-" -- override grepprg
-set grepprg=rg\ --vimgrep
+" replace grep with rg
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
+" NOTE: search and replace trick:
+"
+" :grep "pizza"
+" :cfdo %s/pizza/donut/g | update
 
 
 " ================================
@@ -342,6 +344,6 @@ set statusline+=\
 
 augroup Linting
 	autocmd!
-  autocmd FileType vue setlocal makeprg=yarn\ lint
-  autocmd FileType javascript setlocal makeprg=yarn\ lint
+  autocmd FileType vue setlocal makeprg=pre-commit\ run\ --files
+  autocmd FileType javascript setlocal makeprg=pre-commit\ run\ --files
 augroup END
