@@ -87,7 +87,7 @@ if type nnn  > /dev/null; then
   export NNN_FIFO='/tmp/nnn.fifo'
 
   # plugins
-  export NNN_PLUG='b:bookmarks;j:autojump;p:preview-tui;i:imgview;c:fzcd;o:fzopen;e:gpge;d:gpgd;n:nmount;m:mtpmount'
+  export NNN_PLUG='b:bookmarks;j:autojump;p:preview-tui;i:imgview;f:fzplug;c:fzcd;o:fzopen;e:gpge;d:gpgd;n:nmount;m:mtpmount'
 
   function n() {
     # Block nesting of nnn in subshells
