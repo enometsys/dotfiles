@@ -157,28 +157,23 @@ if [ -t 0 ]; then
 
   # enable ssh support
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-  gpgconf --launch gpg-agent
-
-  # Although all GnuPG components try to start the gpg-agent as needed, 
-  # this is not possible for the ssh support because ssh does not know about it. 
-  # Thus if no GnuPG tool which accesses the agent has been run, 
-  # there is no guarantee that ssh is able to use gpg-agent for authentication
-  # below is run to start gpg-agent so as to make ssh support possible if
-  # ssh features are invoked before any gpg-agent-needed ops are run (e.g. immediateley after reboot)
-  echo UPDATESTARTUPTTY | gpg-connect-agent > /dev/null
+  # gpgconf --launch gpg-agent
 fi
 
 # ------ Environment loader (development)
 if type direnv  > /dev/null; then
   eval "$(direnv hook zsh)"
-fi
-asdf_path="/opt/asdf-vm/asdf.sh"
-if [ -f "$asdf_path" ]; then
-  . "$asdf_path"
+  asdf_path="/opt/asdf-vm/asdf.sh"
+  if [ -f "$asdf_path" ]; then
+    . "$asdf_path"
+  fi
+  asdf_zshrc_path="${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+  if [ -f "$asdf_zshrc_path" ]; then
+    source "$asdf_zshrc_path"
+  fi
 fi
 
 # ------ Prompt
 if type starship  > /dev/null; then
   eval "$(starship init zsh)"
 fi
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
