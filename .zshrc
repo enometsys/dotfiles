@@ -161,12 +161,17 @@ if [ -t 0 ]; then
 fi
 
 # ------ Environment loader (development)
+asdf_path="/opt/asdf-vm/asdf.sh"
+if [ -f "$asdf_path" ]; then
+  . "$asdf_path"
+
+  # append completions to fpath then initialise completions with ZSH's compinit
+  fpath=(${ASDF_DIR}/completions $fpath)
+  autoload -Uz compinit && compinit
+fi
+
 if type direnv  > /dev/null; then
   eval "$(direnv hook zsh)"
-  asdf_path="/opt/asdf-vm/asdf.sh"
-  if [ -f "$asdf_path" ]; then
-    . "$asdf_path"
-  fi
   asdf_zshrc_path="${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
   if [ -f "$asdf_zshrc_path" ]; then
     source "$asdf_zshrc_path"
