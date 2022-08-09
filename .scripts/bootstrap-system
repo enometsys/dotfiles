@@ -11,65 +11,65 @@ packages+=(
   # for graphics support
   "xf86-video-intel" "mesa"
   # for rendering the x system
-  "xorg-server" "xorg-xrandr" 
+  "xorg-server" "xorg-xrandr"
   # for starting the window manager
-  "xorg-xinit" 
+  "xorg-xinit"
   # used by dwm to render statusbar
-  "xorg-xsetroot" 
+  "xorg-xsetroot"
   # used to test 3d rendering/gpu support (glxgears)
-  "mesa-demos" 
+  "mesa-demos"
   # used to render most fonts
-  "xorg-fonts" "ttf-dejavu" 
+  "xorg-fonts" "ttf-dejavu"
   # used for locking screen when inactive
-  "xautolock" 
+  "xautolock"
   # used to generate graphics in lock screen
-  "cowsay" "fortune-mod" 
+  "cowsay" "fortune-mod"
+  # used to create/render desktop notifications
+  "libnotify" "dunst"
 )
 
 ## Audio system
 packages+=(
   # low-level utilities to manage audio devices
-  "alsa-utils" 
+  "alsa-utils"
   # higher level utility to manage audio devices
-  "pulseaudio-alsa" "pulseaudio-bluetooth" "pulseaudio-jack" 
+  "pulseaudio-alsa" "pulseaudio-bluetooth" "pulseaudio-jack"
   # frontend to pulseaudio
-  "pavucontrol" 
+  "pavucontrol"
 )
 
 ## Inputs
 packages+=(
-  # used to create/render desktop notifications
-  "libnotify" "dunst" 
   # used to bind actions in keyboard input
-  "libinput" "xbindkeys" 
+  "libinput" "xbindkeys"
   # used to simulate keyboard input
-  "xdotool" 
+  "xdotool"
 )
 
 ## Power managment
 packages+=(
   # used to control keyboard backlight
-  "acpilight" 
+  "acpilight"
   # used for power mgt, specifically to query battery status
-  "acpi" 
+  "acpi"
   # used to query and somewhat control machine status/power/cpu
-  "powertop" "thermald" "cpupower" 
+  "powertop" "thermald" "cpupower"
   # used for automatic power mgt for laptops
-  "tlp" "tlp-rdw" 
+  "tlp" "tlp-rdw"
 )
 
 ## Network managment
 packages+=(
   # used to manage network profiles/interfaces
-  "networkmanager" 
+  "networkmanager"
   # uncomplicated firewall
-  "ufw" 
+  "ufw"
   # utility to download files from the network
-  "wget" "curl" "xh" "aria2" 
+  "wget" "curl" "xh" "aria2"
   # used to move files around (event w/in a network)
-  "rsync" 
+  "rsync"
   # ssh package
-  "openssh" 
+  "openssh"
   # dig alternative
   "dog"
 )
@@ -77,46 +77,46 @@ packages+=(
 ## Security
 package+=(
   # password management using GPG
-  "pass" 
+  "pass"
   # utility to managing yubikeys
-  "yubikey-manager" 
+  "yubikey-manager"
 )
 
 ## Bluetooth
 packages+=(
   # bluetooth driver
-  "bluez" 
+  "bluez"
   # cli bluetooth frontend
-  "bluez-utils" 
+  "bluez-utils"
   # GUI bluetooth frontend
-  "blueman" 
+  "blueman"
 )
 
 ## File system
 packages+=(
   # utility to create XDG directorys in a user's home directory
-  "xdg-user-dirs" 
+  "xdg-user-dirs"
   # GUI file manager. TODO: remove after mastering nnn
-  "nautilus" 
+  "nautilus"
   # driver and utilities to mount removable devices
-  "udisks2" 
-  # "udevil" 
+  "udisks2"
+  # "udevil"
   # utility to integrate mtp to file managers (together with jmtpfs, will enable mtp connection)
-  "gvfs-mtp" 
+  "gvfs-mtp"
   # utilities for managing windows file system (for dual boot and external harddrives)
-  "exfat-utils" "ntfs-3g" 
+  "exfat-utils" "ntfs-3g"
   # utility more convinient than "coreutils/find"
-  "ripgrep" "fd" 
+  "ripgrep" "fd"
   # terminal-based file manager
-  "nnn" 
+  "nnn"
   # smarter cd command
   "zoxide"
   # df and du alternatives
-  "duf" "dust" 
+  "duf" "dust"
   # for rendeding directory tree as a tree (alternative to ls)
-  "tree" 
+  "tree"
   # provides "gio trash" that is used by file managers (nnn)
-  "glib2" 
+  "glib2"
   # env loader
   "direnv"
 )
@@ -127,55 +127,53 @@ packages+=(
   "starship"
   # fuzzy finder
   "fzf"
-  # Process visualization tool
-  "bottom"
+  # Resources visualization tool
+  "bottom" "htop"
   # Container-images visualization tool
-  "ctop" 
+  "ctop"
   # better altenative to bash
   "zsh" "zsh-completions" "zsh-syntax-highlighting"
   # cli utility for managing json and yaml
   "jo" "jq" "jless" "yq"
   # CLI for exploring and arranging tabular data (e.g. csv, xlsx)
-  "visidata" "xsv" 
+  "visidata" "xsv"
   # for viewing pdf, epubs
   "zathura" "zathura-pdf-mupdf"
   # utilities for managing compressed files
-  "tar" "unrar" "unzip" 
+  "tar" "unrar" "unzip"
   # main file editor (will be set as both $EDITOR and $VISUAL)
-  "neovim" 
+  "neovim"
   # better "coreutils/cat" alternative
-  "bat" 
+  "bat"
   # markdown terminal presentation
-  "glow" 
-  # better "procps-ng/top" alternative
-  "htop" 
+  "glow"
   # for displaying system specs
-  "neofetch" 
+  "neofetch"
   # for managing man pages
   "man-db" "man-pages" "tealdeer"
   # for managing clipboard
-  "xclip" 
+  "xclip"
   # terminal multiplexer
-  "tmux" 
+  "tmux"
   # calculator
-  "bc" 
+  "bc"
   # email management
-  "himalaya" 
+  "himalaya"
   # data progress through a pipe
-  "pv" 
+  "pv"
   # chat client
-  "weechat" 
+  "weechat"
 )
 
 ## Media
 packages+=(
   # for creating screen shots
-  "scrot" "flameshot"
+  "flameshot" "scrot"
   # screen recorder
   "simplescreenrecorder"
   # for playing videos
   "vlc"
-  # for rendering/viewing images
+  # for rendering/viewing images (separate window)
   "feh"
   # for rendering images in terminal
   "chafa" "viu" "catimg"
@@ -194,7 +192,7 @@ packages+=(
   # git diff syntax highlighter
   "git-delta"
   # for container managment
-  "docker" 
+  "docker"
   # terminal interface to k8s clusters. kubectx providers `kubens`
   "kubectl" "kubectx" "k9s"
 )
