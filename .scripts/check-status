@@ -65,9 +65,14 @@ function print_date {
 }
 
 function print_status {
-  # status="$( print_network )$( print_video )$( print_volume )$( print_battery )$( print_date )$SPACING"
-  # status="$( print_network )$( print_bluetooth )$( print_volume )$( print_battery )$( print_date )$SPACING"
-  status="$( print_network )$( print_mail )$( print_bluetooth )$( print_volume )$( print_battery )$( print_date )$SPACING"
+  status=""
+  status+="$( print_network )"
+  # status+="$( print_video )"
+  status+="$( print_bluetooth )"
+  status+="$( print_volume )"
+  status+="$( print_battery )"
+  status+="$( print_date )"
+  status+="$SPACING"
   echo -e "$status"
 }
 
