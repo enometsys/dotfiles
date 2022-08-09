@@ -73,6 +73,12 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " preview colors in source code
   Plug 'ap/vim-css-color'
 
+  " formatting tables using tabs
+  Plug 'godlygeek/tabular'
+
+  " vimwiki
+  Plug 'vimwiki/vimwiki'
+
   " --- LSP
 
   " lsp
@@ -153,6 +159,9 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " -- LSP
   " disable diagnostics support
   let g:lsp_diagnostics_enabled = 0
+
+  " - Vimwiki
+  let g:vimwiki_list = [{'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 endif
 
 
