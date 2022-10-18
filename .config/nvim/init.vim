@@ -79,6 +79,9 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " vimwiki
   Plug 'vimwiki/vimwiki'
 
+  " emmet expansion
+  Plug 'mattn/emmet-vim'
+
   " --- LSP
 
   " lsp
@@ -88,32 +91,20 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   " autocomplete
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
- 
-  " language packs (basic syntax highlighting)
-  Plug 'sheerun/vim-polyglot'
 
   " snippets
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
  
-  " markdown
+  " language packs (basic syntax highlighting)
+  " Plug 'sheerun/vim-polyglot'
   Plug 'preservim/vim-markdown'
-
-  " formatting tables using tabs
-  Plug 'godlygeek/tabular'
-
-  " emmet expansion
-  Plug 'mattn/emmet-vim'
-
-  " golang helpers
+  Plug 'pangloss/vim-javascript'
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-
-  " protobuf
-  " Plug 'uarun/vim-protobuf'
   Plug 'wfxr/protobuf.vim'
-
-  " kotlin
   Plug 'udalov/kotlin-vim'
+  Plug 'posva/vim-vue'
+  " Plug 'digitaltoad/vim-pug'
 
   " --- APPS
 
