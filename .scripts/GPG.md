@@ -206,3 +206,6 @@ Remove secret key in keyring
 ```sh
 $ gpg --delete-secret-key $KEYID
 ```
+
+##### Chaning the expiration date
+https://shibumi.dev/posts/changing-the-expiration-date-of-your-yubikey/
