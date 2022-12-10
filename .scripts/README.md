@@ -100,6 +100,16 @@ https://wiki.archlinux.org/title/Mac
 
 ###### Keyboard backlight
 
+###### Wifi cannot scan 5G
+
+Main issue:
+https://bbs.archlinux.org/viewtopic.php?id=150092
+
+```sh
+$ pacman -Syu crda
+$ vim /etc/conf.d/wireless-regdom # uncomment the line for the right country/region
+$ reboot
+```
 
 ###### FacetimeHD webcam driver installation
 
