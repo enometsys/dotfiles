@@ -104,6 +104,7 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   Plug 'wfxr/protobuf.vim'
   Plug 'udalov/kotlin-vim'
   Plug 'posva/vim-vue'
+  Plug 'rust-lang/rust.vim'
   " Plug 'digitaltoad/vim-pug'
 
   " --- APPS
