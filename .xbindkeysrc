@@ -97,6 +97,14 @@
 "$HOME/.scripts/change-keyboard-brightness down"
   XF86KbdBrightnessDown
 
+# SS utility
+"flameshot gui"
+  XF86LaunchA
+
+# Passmenu
+"passmenu --type -i -l 10"
+  XF86LaunchB
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
