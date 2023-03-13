@@ -65,6 +65,7 @@ silent! if plug#begin('~/.local/share/nvim/plugged')
   Plug 'nanotee/zoxide.vim'
 
   " fuzzy find operator
+  Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
 
   " preview markdown files in browser
