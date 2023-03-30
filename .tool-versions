@@ -1,0 +1,142 @@
+### native apps
+# - gnupg
+# - openssh-server
+# - curl
+# - git (~/.gitconfig)
+# - tig
+# - tree
+# - jo
+# - tmux (~/.tmux.conf)
+# - neovim (~/.config/nvim/init.vim) must be latest
+# - starship (~/.config/starship.tom)
+# - zsh (~/.zshrc) // make default shell
+# - zsh-syntax-highlighting
+# - asdf
+# - nnn
+# - xclip
+# - htop
+# - miniserve (light webserver)
+# - docker
+# - wixl (building msi installer)
+# - qpdf (for the html->pdf api feature)
+# - bandwhich (bandwidth monitoring tool)
+# - rustscan (nmap alt)
+# - helix (nvim alt)
+# - asciinema (terminal recorder)
+# - asciiquarium (terminal screensaver - acquariam)
+# - cowsay (terminal cow art)
+# - atop (top alt - with recording capability)
+# - catimg (terminal img viewer)
+# - viu (terminal img viewer)
+# - chafa (terminal img viewer)
+# - cmus (terminal music player)
+# - cpupower (cpu monitor)
+# - powertop (power monitor - for battery-operated devices)
+# - ctop (top for containers)
+# - dog (dig alt)
+# - flameshot (screen capture utility)
+# - gource (VCS visualization)
+# - himalaya (email client)
+# - mosh (ssh alt)
+# - pass (password mgr)
+# - pv (pipe -- in terminal -- progress monitor)
+# - rsync (data transfer)
+# - simplescreenrecorder (screen recorder - video)
+# - visidata (csv/xlsx viewer in terminal)
+# - weechat (irc client)
+# - xsv (csv tool)
+
+### asdf apps
+# - direnv
+# - xh (curl alt)
+# - httpie-go (curl alt)
+# - aria2 (download utility)
+# - bat (cat alt)
+# - glow (markdown reader)
+# - bottom (htop alt)
+# - duf (df alt)
+# - dust (du alt)
+# - exa (ls alt)
+# - fzf
+# - jiq (jid + jq)
+# - jless (json viewer)
+# - yq (json/yaml/xml/csv processor)
+# - jq (json processor)
+# - jqp (jq tuts/exploration)
+# - yj (yaml/toml/json/hcl converter)
+# - grpcurl (curl for grpc)
+# - grype (vulnerability scanner: fs and containers)
+# - trivy (security scanner)
+# - gum (shelscripts tooling)
+# - viddy (watch alt)
+# - mitmproxy (https proxy)
+# - rclone (cloud backup tooling)
+# - ripgrep
+# - tmux
+# - websocat (websocket client)
+# - yadm
+# - zoxide (cd alt)
+#
+# - watchexec
+# - tilt (microservice apps dev toolchain)
+# - k3sup
+# - k3d
+# - k9s
+# - kubectl
+# - kubectx
+# - upx (packar for executables)
+# - tonnage (k8s cluster resource capacity utility)
+# - kustomize (NOTE: prefer to use kubectl kustomize)
+# - doctl
+# - buf (protobuf toolchain)
+# - caddy (webserver)
+# - ctop (top for container images)
+# - helm (k8s toolchain)
+# - please (built system)
+# - protoc
+# - protoc-gen-go
+# - protoc-gen-go-grpc
+# - protoc-gen-grpc-web
+# - asdf-protoc-gen-js
+# - k6 (load testing)
+# - act (run gh actions locally)
+# - actionlint (lint gh actions - replace action-validator)
+# - spectral
+# - github-cli
+# - shellcheck
+# - sqlite
+# - mongosh
+# - mongo-tools
+# - wasi-sdk
+# - wasm3 (interpreter)
+# - wasmer (compiler/runtime)
+# - wasmtime (runtime)
+# - nodejs
+# - golang
+# - python
+# - v
+# - zig
+# - solidity
+
+direnv 2.32.2
+xh 0.17.0
+github-cli 2.22.1
+mongosh 1.6.2
+duf 0.8.1
+dust 0.8.4
+python 3.11.1
+zoxide 0.9.0
+ripgrep 13.0.0
+fzf 0.37.0
+aria2 1.36.0
+bat 0.22.1
+glow 1.5.0
+bottom 0.8.0
+exa 0.10.1
+jq 1.6
+k9s 0.27.2
+viddy 0.3.6
+doctl 1.92.1
+golang 1.18.3
+rust 1.65.0
+yq 4.32.2
