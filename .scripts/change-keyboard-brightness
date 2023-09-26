@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function cbright {
-  xbacklight -ctrl smc::kbd_backlight -get | cut -d'.' -f1
+  xbacklight -ctrl apple::kbd_backlight -get | cut -d'.' -f1
 }
 
 function notify {
@@ -41,17 +41,17 @@ function notify {
 case $1 in
   up)
     # +5%
-    xbacklight -ctrl smc::kbd_backlight -inc 5
+    xbacklight -ctrl apple::kbd_backlight -inc 5
 	  notify
 	;;
   down)
     # -5%
-    xbacklight -ctrl smc::kbd_backlight -dec 5
+    xbacklight -ctrl apple::kbd_backlight -dec 5
 	  notify
 	;;
   optimal)
     # Toggle optimal
-    xbacklight -ctrl smc::kbd_backlight -set 25
+    xbacklight -ctrl apple::kbd_backlight -set 25
     notify
 	;;
 esac 

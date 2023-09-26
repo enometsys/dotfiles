@@ -195,3 +195,20 @@ Extensions:
 [WebToEpub](https://chrome.google.com/webstore/detail/akiljllkbielkidmammnifcnibaigelm)
 [Wizdler](https://chrome.google.com/webstore/detail/wizdler/oebpmncolmhiapingjaagmapififiakb) for web SOAP client (for philhealth testing)
 [Resolution Zoom](https://chrome.google.com/webstore/detail/resolution-zoom/enjjhajnmggdgofagbokhmifgnaophmh)
+
+## Restore bootable USB into usable thumbdrive
+```sh
+# wipe the drive
+$ wipefs -- all /dev/sdX
+
+# create new partition table
+$ fdisk /dev/sdX
+
+# create DOS/MSDOS (MBR) partition table
+# create new partition (primary) spanning the whole usb drive
+# set the partition type to W95 FAT32 (LBA) hex code b
+# write changes to disk
+
+# format partition to FAT32
+$ mkfs.fat -F32 /dev/sdX1
+```

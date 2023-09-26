@@ -1,5 +1,5 @@
 ! using integer multiples of 96 usually works best, e.g. 192 for 200% scaling.
-! Xft.dpi: 192
+! Xft.dpi: 96
 Xft.dpi: 150
 
 ! monitor preferences for MBP 12,1

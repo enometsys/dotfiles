@@ -3,11 +3,11 @@
 # Audio volume changer using alsa mixer
 
 function cvol {
-  amixer get Master | grep '%' | head -n 1 | awk -F'[' '{print $2}' | awk -F'%' '{print $1}'
+  bc <<< "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)*100" | cut -d '.' -f1
 }
 
 function chkmute {
-  amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off
+  wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep MUTED
 }
 
 function notify {
@@ -37,9 +37,9 @@ function notify {
 case $1 in
   up)
 	  # Unmute
-	  amixer set Master on -q
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
 	  # +5%
-	  amixer sset Master 5%+ -q
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
     # update statusbar
     . "$HOME/.scripts/check-status" update-statusbar
     # notify
@@ -47,9 +47,9 @@ case $1 in
 	;;
   down)
     # Unmute
-	  amixer set Master on -q
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
     # -5%
-	  amixer sset Master 5%- -q
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     # update statusbar
     . "$HOME/.scripts/check-status" update-statusbar
     # notify
@@ -57,7 +57,7 @@ case $1 in
 	;;
   mute)
     # Toggle mute
-	  amixer set Master toggle -q
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
     # update statusbar
     . "$HOME/.scripts/check-status" update-statusbar
     # notify

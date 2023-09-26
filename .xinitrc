@@ -61,11 +61,19 @@ trap 'kill "$notifsprocpid"' EXIT
 logoutlocpath="$HOME/.logout"
 trap 'rm $logoutlocpath &>/dev/null' EXIT
 
+# start touchegg-client
+touchegg &
+toucheggprocpid=$!
+trap 'kill "$toucheggprocpid"' EXIT
+
 # start dwm (restart dwm without loosing x session)
 while [ ! -f "$logoutlocpath" ]; do
   # hidpi
   # export GDK_DPI_SCALE=0.5
   export GDK_DPI_SCALE=1
+
+  # key mods
+  [[ -f $HOME/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
   # desktop bg
   feh --bg-scale "$HOME/.bg.jpg"

@@ -44,6 +44,10 @@ export LS_COLORS
 if [[ ! "$PATH" == *$USER/.local/bin* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/.local/bin"
 fi
+# add moon
+if [[ ! "$PATH" == *$USER/.moon/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.moon/bin"
+fi
 
 # ------ Editor
 # Use vim as default editor
@@ -118,6 +122,13 @@ fi
 
 if type zoxide  > /dev/null; then
   eval "$(zoxide init zsh)"
+fi
+
+if type broot  > /dev/null; then
+  launcherpath="$HOME/.config/broot/launcher/bash/br"
+  if [ -f "$launcherpath" ]; then 
+    source "$launcherpath"
+  fi
 fi
 
 # ------ Filter

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Audio volume changer using alsa acpi
+# Audio volume changer using acpi
 
 function notify {
   batt_status=$( acpi -b | awk -F'[,:% ]' '{print $4}' )
