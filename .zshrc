@@ -58,7 +58,6 @@ fi
 
 # Use nvim over Vim
 if type nvim  > /dev/null; then                                                                                                                                                  
-  alias vim="nvim"                                                                                                                                                               
   export EDITOR=nvim
   export VISUAL=nvim
 fi
