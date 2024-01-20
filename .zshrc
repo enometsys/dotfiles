@@ -49,6 +49,10 @@ if [[ ! "$PATH" == *$USER/.moon/bin* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/.moon/bin"
 fi
 
+# ------ Remote
+# fix for terminal emulators
+alias ssh='TERM="xterm-256color" ssh'
+
 # ------ Editor
 # Use vim as default editor
 if type vim  > /dev/null; then                                                                                                                                                  
