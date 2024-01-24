@@ -29,6 +29,7 @@
         "temperature",
         "memory",
         "battery",
+        "privacy",
 
         // connecting
         "network",
@@ -39,7 +40,7 @@
         "custom/playerctl",
         // "custom/idle_inhibitor",
         // "custom/dnd",
-        // "pulseaudio",
+        "pulseaudio",
         // "backlight",
 
         // system
@@ -65,6 +66,30 @@
         "format": "{icon} {capacity}%",
         "format-icons": ["󱃍", "󰁺", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "tooltip": true
+    },
+
+
+    "privacy": {
+      "icon-spacing": 4,
+      "icon-size": 18,
+      "transition-duration": 250,
+      "modules": [
+        {
+          "type": "screenshare",
+          "tooltip": true,
+          "tooltip-icon-size": 24
+        },
+        {
+          "type": "audio-out",
+          "tooltip": true,
+          "tooltip-icon-size": 24
+        },
+        {
+          "type": "audio-in",
+          "tooltip": true,
+          "tooltip-icon-size": 24
+        }
+      ]
     },
 
     "clock": {
@@ -153,6 +178,11 @@
     "tray": {
         "icon-size": 21,
         "spacing": 5
+    },
+
+    "sway/workspaces": {
+      "format": "{index}",
+      "disable-scroll": true
     },
 
     "custom/pacman": {
