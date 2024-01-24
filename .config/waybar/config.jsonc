@@ -17,14 +17,14 @@
     "height": 30,
     "position": "top",
 
-    "modules-left": ["custom/menu", "sway/workspaces", "custom/scratchpad"],
-    "modules-center": ["custom/wf-recorder", "sway/mode", "custom/weather"],
+    "modules-left": ["sway/workspaces", "custom/scratchpad"],
+    "modules-center": ["custom/wf-recorder", "sway/mode"],
     "modules-right": [
         // informational
-        "sway/language",
-        "custom/github",
-        "custom/clipboard",
-        "custom/zeit",
+        // "sway/language",
+        // "custom/github",
+        // "custom/clipboard",
+        // "custom/zeit",
         "cpu",
         "temperature",
         "memory",
@@ -33,19 +33,19 @@
         // connecting
         "network",
         "bluetooth",
-        "custom/valent",
+        // "custom/valent",
 
         // media
         "custom/playerctl",
-        "custom/idle_inhibitor",
-        "custom/dnd",
-        "pulseaudio",
-        "backlight",
+        // "custom/idle_inhibitor",
+        // "custom/dnd",
+        // "pulseaudio",
+        // "backlight",
 
         // system
-        "custom/adaptive-light",
-        "custom/sunset",
-        "custom/pacman",
+        // "custom/adaptive-light",
+        // "custom/sunset",
+        // "custom/pacman",
 
         "tray",
         "clock"
