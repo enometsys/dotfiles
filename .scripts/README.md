@@ -169,6 +169,13 @@ Then, use `usb_modeswitch` to reset the adapter:
 usb_modeswitch -R -v <vendor ID> -p <product ID>
 ```
 
+Another possible solution (if bluetooth suddently stops) is to add the ff as a kernel param
+```sh
+btusb.enable_autosuspend=n
+```
+source: https://wiki.archlinux.org/title/Bluetooth#Troubleshooting
+
+
 ### Apps
 
 #### Google Chrome
