@@ -18,12 +18,6 @@ if type nnn > /dev/null; then
   curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
 fi
 
-# bootstrap nvim
-if type nvim  > /dev/null; then
-  echo "bootstraping nvim..."
-  nvim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
-fi
-
 # yadm bootstrap
 if type yadm  > /dev/null; then
   echo "Updating the yadm repo origin to SSH"
