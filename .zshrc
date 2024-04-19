@@ -25,7 +25,8 @@ zstyle :compinstall filename $HOME/.zshrc
 autoload -Uz compinit && compinit
 
 # ------ Syntax Highlighting
-zsh_syntax_highlighting_path="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# zsh_syntax_highlighting_path="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+zsh_syntax_highlighting_path="/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 if [ -f "$zsh_syntax_highlighting_path" ]; then 
   source "$zsh_syntax_highlighting_path"
 fi
@@ -175,7 +176,8 @@ if [ -t 0 ]; then
 fi
 
 # ------ Environment loader (development)
-asdf_path="/opt/asdf-vm/asdf.sh"
+# asdf_path="/opt/asdf-vm/asdf.sh"
+asdf_path="/opt/homebrew/opt/asdf/libexec/asdf.sh"
 if [ -f "$asdf_path" ]; then
   . "$asdf_path"
 
