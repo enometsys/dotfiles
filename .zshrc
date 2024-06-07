@@ -20,6 +20,10 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 
 # ------ Autocomplete
+local_completion_path="$HOME/.zsh/completions"
+if [ -d "$local_completion_path" ]; then
+  fpath=($local_completion_path $fpath)
+fi
 # Configure autocomplete
 zstyle :compinstall filename $HOME/.zshrc
 autoload -Uz compinit && compinit
@@ -44,10 +48,6 @@ export LS_COLORS
 # add local bin in path
 if [[ ! "$PATH" == *$USER/.local/bin* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/.local/bin"
-fi
-# add moon
-if [[ ! "$PATH" == *$USER/.moon/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}$HOME/.moon/bin"
 fi
 
 # ------ Remote
@@ -175,6 +175,15 @@ if [ -t 0 ]; then
   # gpgconf --launch gpg-agent
 fi
 
+# ------ Package manager (homebrew)
+if type brew  > /dev/null; then
+  completions_path="/opt/homebrew/share/zsh/site-functions"
+  if [ -d "$completions_path" ]; then
+    fpath=($completions_path $fpath)
+    autoload -Uz compinit && compinit
+  fi
+fi
+
 # ------ Environment loader (development)
 # asdf_path="/opt/asdf-vm/asdf.sh"
 asdf_path="/opt/homebrew/opt/asdf/libexec/asdf.sh"
@@ -188,11 +197,34 @@ fi
 
 if type direnv  > /dev/null; then
   eval "$(direnv hook zsh)"
+
+  # from https://github.com/asdf-community/asdf-direnv
   asdf_zshrc_path="${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
   if [ -f "$asdf_zshrc_path" ]; then
     source "$asdf_zshrc_path"
   fi
 fi
+
+# ------ Colima
+if type colima > /dev/null; then
+  # https://github.com/abiosoft/colima/blob/main/docs/FAQ.md
+  export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+  # sudo ln -sf $HOME/.colima/default/docker.sock /var/run/docker.sock
+fi
+
+# ------ Proto
+proto_dir="$HOME/.proto"
+if [ -d "$proto_dir" ]; then
+  export PROTO_HOME="$proto_dir"
+  export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+fi
+
+# ------ PNPM
+export PNPM_HOME="/Users/metsys/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 # ------ Prompt
 if type starship  > /dev/null; then
