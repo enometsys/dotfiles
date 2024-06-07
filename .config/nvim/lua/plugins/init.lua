@@ -135,4 +135,11 @@ return {
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
   },
+
+  -- Search and replace
+  {
+    "nvim-pack/nvim-spectre",
+    event = "VeryLazy",
+    cmd = "Spectre",
+  },
 }
