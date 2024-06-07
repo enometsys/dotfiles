@@ -137,3 +137,52 @@
 # - k9s 0.27.3
 # - mongosh 1.6.2
 # - doctl 1.92.1
+
+### installed via pkg manager
+# - asdf
+# - colima
+# - ctop
+# - direnv
+# - docker
+# - doctl
+# - dog
+# - duf
+# - dust
+# - fd
+# - fzf
+# - gh
+# - git-delta
+# - gnu-sed
+# - gnupg
+# - htop
+# - hurl
+# - infisical
+# - jo
+# - jq
+# - k9s
+# - kubectx
+# - kubernetes-cli
+# - libusb
+# - miniserve
+# - mongosh
+# - moon
+# - neovim
+# - nss
+# - nvm
+# - pass
+# - pinentry-mac
+# - pipx
+# - python-setuptools
+# - python@3.12
+# - ripgrep
+# - starship
+# - tesseract
+# - tig
+# - tmux
+# - watch
+# - wget
+# - xh
+# - yadm
+# - ykman
+# - zoxide
+# - zsh-syntax-highlighting
