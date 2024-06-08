@@ -1,3 +1,20 @@
+# ------ Package manager (homebrew)
+brewbinpath="/opt/homebrew/bin/brew"
+if [ -f "$brewbinpath" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+if type brew  > /dev/null; then
+  completions_path="/opt/homebrew/share/zsh/site-functions"
+  if [ -d "$completions_path" ]; then
+    fpath=($completions_path $fpath)
+    autoload -Uz compinit && compinit
+  fi
+fi
+
+# ------ Locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
 # ------ history
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -173,15 +190,6 @@ if [ -t 0 ]; then
   # enable ssh support
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   # gpgconf --launch gpg-agent
-fi
-
-# ------ Package manager (homebrew)
-if type brew  > /dev/null; then
-  completions_path="/opt/homebrew/share/zsh/site-functions"
-  if [ -d "$completions_path" ]; then
-    fpath=($completions_path $fpath)
-    autoload -Uz compinit && compinit
-  fi
 fi
 
 # ------ Environment loader (development)
