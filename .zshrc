@@ -238,3 +238,4 @@ esac
 if type starship  > /dev/null; then
   eval "$(starship init zsh)"
 fi
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
