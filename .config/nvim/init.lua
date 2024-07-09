@@ -37,3 +37,22 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- Enable nvim_treesitter folding on the ff filetypes: javascript, rust
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "javascript,rust",
+  callback = function()
+    vim.o.foldmethod = "expr"
+    vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.o.foldenable = false -- Disable folding at startup
+  end,
+})
+
+-- Enable indent folding on the ff filetypes: yaml, json
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "yaml,json",
+  callback = function()
+    vim.o.foldmethod = "indent"
+    vim.o.foldenable = false -- Disable folding at startup
+  end,
+})

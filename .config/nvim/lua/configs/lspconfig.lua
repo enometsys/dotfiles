@@ -17,8 +17,3 @@ for name, opts in pairs(servers) do
 
   require("lspconfig")[name].setup(opts)
 end
-
--- Tree-sitter based folding. (Technically not a module because it's per windows and not per buffer.)
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldenable = false -- Disable folding at startup
