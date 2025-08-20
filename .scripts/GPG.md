@@ -166,6 +166,7 @@ gpg/card> quit
 ###### Move the keys into the card
 
 ```sh
+# IMPORTANT: when updating, move encryption subkey first
 $ gpg --expert --edit-key $KEYID
 gpg> toggle
 gpg> key 1
@@ -207,5 +208,43 @@ Remove secret key in keyring
 $ gpg --delete-secret-key $KEYID
 ```
 
-##### Chaning the expiration date
+##### Changing the expiration date
+
 https://shibumi.dev/posts/changing-the-expiration-date-of-your-yubikey/
+
+```sh
+# Download the stored (encrypted) backup
+# stored as ~/Documents/$KEYID.secrets.tgz.gpg
+
+$ cd ~/Documents
+
+# Decrypt backup
+$ gpg --decrypt < $KEYID.secrets.tgz.gpg | tar xz
+
+# Delete the current secrets
+$ gpg --delete-secret-and-public-keys 0x853F15741D476789
+
+# Import the secret and subkeys
+$ gpg --import $KEYID.priv.asc
+$ gpg --import $KEYID.privsubs.asc
+
+# IMPORTANT: Update encryption subkey first
+$ gpg --expert --edit-key $KEYID
+gpg> key 2
+gpg> expire
+Your selection? 1y
+
+gpg> key 2
+gpg> key 1
+gpg> expire
+Your selection? 1y
+
+gpg> key 2
+gpg> key 3
+gpg> expire
+Your selection? 1y
+
+gpg> save
+
+# Move keys to card
+```
